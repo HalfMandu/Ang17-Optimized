@@ -11,6 +11,12 @@ palceholder2
 palceholder3
 } -->
 
+<!-- <app-header></app-header>  -->
+
+@defer (on timer(2s)){
+	<app-header></app-header> 
+}
+
 <!-- @defer {
     <app-header></app-header> 
 } @loading (after 2000ms; minimum 2s) {
