@@ -1,9 +1,64 @@
 hello 1
 
 <!-- Default Angular Header -->
+<!-- @defer (on viewport; prefetch on timer(2000)){
 <app-header></app-header>
+} @placeholder {
+palceholder1
+} @loading {
+palceholder2
+} @error {
+palceholder3
+} -->
 
-<button style="padding: 20px; color: white; background-color: green;" routerLink="a">Load Module A</button>
-<button style="padding: 20px; color: white; background-color: blue;" routerLink="b">Load Module B</button>
+<!-- @defer {
+    <app-header></app-header> 
+} @loading (after 2000ms; minimum 2s) {
+    uhhhh
+    <img alt="loading..." src="loading.gif" />
+} @placeholder {
+    palceholder1
+} -->
+
+<div class="center"> 
+	<h1 style="color: green;">Modal button with scss</h1> 
+	<h3> 
+		create an angular application to use scss
+	</h3> 
+</div> 
+
+<button (click)="openModal()"> 
+	Show Steps 
+</button> 
+
+<div class="modal"
+	*ngIf="showModal"> 
+	<div class="modal-content"> 
+		<span (click)="closeModal()"> 
+			× 
+		</span> 
+		<ul> 
+			<li> 
+				Create a new Angular project 
+			</li> 
+			<li> 
+				Install Sass 
+			</li> 
+			<li> 
+				Configure Angular to use Sass 
+			</li> 
+			<li> 
+				Import the Sass file in your Angular component 
+			</li> 
+			<li> 
+				Run the Angular application 
+			</li> 
+		</ul> 
+	</div> 
+</div>
+
+
+<!-- <button style="padding: 20px; color: white; background-color: green;" routerLink="a">Load Module A</button>
+<button style="padding: 20px; color: white; background-color: blue;" routerLink="b">Load Module B</button> -->
 
 <router-outlet />
