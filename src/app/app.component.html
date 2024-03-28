@@ -1,30 +1,56 @@
 hello 1
 
 <!-- Default Angular Header -->
-<!-- @defer (on viewport; prefetch on timer(2000)){
-<app-header></app-header>
-} @placeholder {
-palceholder1
-} @loading {
-palceholder2
-} @error {
-palceholder3
+
+<!-- lazy load after 2 seconds -->
+<!-- @defer (on timer(2s)){
+	<app-header></app-header> 
 } -->
 
-<!-- <app-header></app-header>  -->
-
-@defer (on timer(2s)){
+<!-- lazy load on interaction:
+	interaction will trigger the deferred block when the user interacts with the specified element 
+	through click or keydown events. By default, the placeholder will act as the interaction element 
+	as long as it is a single root element node.
+-->
+<!-- @defer (on interaction) {
 	<app-header></app-header> 
+} @placeholder {
+	<div>Calendar placeholder</div>		
+} -->
+
+<!-- Prefetch -->
+<!-- enables more advanced behaviors, 
+	such as prefetch resources before a user has actually seen or interacted with a defer block
+	but might interact with it soon, making the resources available faster.
+	E.g. the prefetching starts when a browser becomes idle 
+	and the contents of the block is rendered on interaction  
+-->
+@defer (on interaction; prefetch on idle) {
+	<app-header></app-header>
+} @placeholder {
+	<p> prefetch placeholder </p>
+} @error {
+	<p> error placeholder </p>
 }
 
-<!-- @defer {
-    <app-header></app-header> 
-} @loading (after 2000ms; minimum 2s) {
-    uhhhh
-    <img alt="loading..." src="loading.gif" />
-} @placeholder {
-    palceholder1
+<!-- Prefetch on Idle
+trigger the deferred loading once the browser has reached an idle state 
+(detected using the requestIdleCallback API under the hood). 
+This is the default behavior with a defer block.
+viewport would trigger the deferred block when the specified content enters the viewport using the 
+IntersectionObserver
+API. This could be the placeholder content or an element reference.
+By default, the placeholder will act as the element watched for entering viewport 
+as long as it is a single root element node.
+-->
+<!-- @defer (on viewport; prefetch on timer(2000)) { -->
+<!-- @defer (on viewport; prefetch on idle) {
+	<app-header></app-header> 
+} @placeholder (minimum 2100ms) {
+	<p>loading...</p>
 } -->
+
+ <!-- -------------------------------------------------------------------------------  -->
 
 <div class="center"> 
 	<h1 style="color: green;">Modal button with scss</h1> 
@@ -37,12 +63,9 @@ palceholder3
 	Show Steps 
 </button> 
 
-<div class="modal"
-	*ngIf="showModal"> 
+<div class="modal" *ngIf="showModal"> 
 	<div class="modal-content"> 
-		<span (click)="closeModal()"> 
-			× 
-		</span> 
+		<span (click)="closeModal()"> ×	</span> 
 		<ul> 
 			<li> 
 				Create a new Angular project 
@@ -62,9 +85,5 @@ palceholder3
 		</ul> 
 	</div> 
 </div>
-
-
-<!-- <button style="padding: 20px; color: white; background-color: green;" routerLink="a">Load Module A</button>
-<button style="padding: 20px; color: white; background-color: blue;" routerLink="b">Load Module B</button> -->
 
 <router-outlet />
