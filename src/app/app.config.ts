@@ -11,23 +11,21 @@ import {
   withInterceptorsFromDi,
   withInterceptors,
 } from '@angular/common/http';
+import { MessageService } from './services/message.service';
 
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([loggerInterceptor, LoggingInterceptor2])),
-    // provideHttpClient(withInterceptors([LoggingInterceptor2])),
-    // provideHttpClient(withInterceptorsFromDi()),    //DI being phazed out, advised-against...
+    provideHttpClient(withInterceptors([loggerInterceptor, LoggingInterceptor2])),    //Angular 17 approach
+    provideHttpClient(withInterceptorsFromDi()),      //DI being phazed out...but needed for class/Injectable approach
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoggingInterceptor3,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true
-    // },
+    MessageService,
     // HttpClientModule, HttpClient, provideHttpClient()
   ],
 };

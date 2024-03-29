@@ -14,34 +14,28 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  
   title1 = 'ang-optimized';
 
   constructor(private httpClient: HttpClient) {}
-  // constructor() {}
 
   ngOnInit(): void {
     // this.useFetch();
     this.httpClient1();
-    // console.log(this.httpClient1());
   }
 
   //fetch basic demo
-  authorUrl: string = 'https://type.fit/api/quotes';  //array of 2-field objects: author, text
+  authorUrl: string = 'https://type.fit/api/quotes'; //array of 2-field objects: author, text
   async useFetch() {
     const response = await fetch(this.authorUrl);
     console.log(await response.json());
   }
 
   // HttpClient - http.request
-  async httpClient1(){
-    console.log("httpclient...");
-    const response = await this.httpClient.request('GET', this.authorUrl);
-    console.log("httpclient2...");
-    
-    response.subscribe(data => console.log(data));
+  async httpClient1() {
+    console.log('httpclient...');
 
-    return;
+    const response = await this.httpClient.request('GET', this.authorUrl);
+    return response.subscribe(data => console.log(data));
   }
 
   title = 'scss-app';
