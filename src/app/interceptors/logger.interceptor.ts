@@ -2,6 +2,7 @@ import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 
 //Intercept All outgoing HTTP requests and adjust Headers (add Token)
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
+  
   console.log('Intercepting outgoing request...');
   console.log(req);
   // const token = localStorage.getItem('token');

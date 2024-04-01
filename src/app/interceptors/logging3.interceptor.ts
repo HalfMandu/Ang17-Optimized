@@ -12,8 +12,9 @@ import {
 } from '@angular/common/http';
 import { MessageService } from '../services/message.service';
 
+//Intercept all HTTP incoming/outgoing and display simple message
 //Using Injectable Class (implementing HttpInterceptor) instead of exported const
-//maybe just < Ang 17
+//more common < Ang 17
 @Injectable()
 export class LoggingInterceptor3 implements HttpInterceptor {
   constructor(private messenger: MessageService) {}
@@ -22,7 +23,7 @@ export class LoggingInterceptor3 implements HttpInterceptor {
     const started = Date.now();
     let ok: string;
 
-    console.log('INTERCEPTER 3');
+    console.log('Intercepting HTTP for logging...');
 
     // extend server response observable with logging...error is an HttpErrorResponse
     return next.handle(req).pipe(
@@ -42,21 +43,3 @@ export class LoggingInterceptor3 implements HttpInterceptor {
     );
   }
 }
-
-//Intercept both outgoing and returning HTTP calls
-// @Injectable()
-// export class LoggingInterceptor3 implements HttpInterceptor {
-//   constructor() {}
-
-//   intercept(
-//     request: HttpRequest<any>,
-//     next: HttpHandler
-//   ): Observable<HttpEvent<any>> {
-//     console.log('Outgoing HTTP request', request);
-//     return next.handle(request).pipe(
-//       tap((event: HttpEvent<any>) => {
-//         console.log('Incoming HTTP response', event);
-//       })
-//     );
-//   }
-// }

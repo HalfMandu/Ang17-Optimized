@@ -2,9 +2,10 @@ import { HttpEvent, HttpInterceptorFn } from '@angular/common/http';
 import { tap } from 'rxjs';
 
 //Intercept both outgoing and returning HTTP calls
+//Adjusting HTTP Headers in this example
 export const LoggingInterceptor2: HttpInterceptorFn = (req, next) => {
-  console.log('Interceptor 2');
-  console.log('request:');
+
+  console.log('Logging Interceptor 2');
   console.log(req);
   // const token = localStorage.getItem('token');
   const token = 'sometoken';
