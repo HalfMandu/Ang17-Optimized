@@ -1,10 +1,3 @@
-<div class="center">
-	<h1 style="color: green;">Angular 17 Optimized Demo</h1>
-	<h3>
-		create an angular application to use scss
-	</h3>
-</div>
-
 <div>
 	<button (click)="callApiHandler()">Fetch Repos</button>
 </div>
@@ -16,10 +9,6 @@
 <li class="list-item" *ngFor="let item of appData?.slice(0, 4)"><b>{{item.author}}</b> : {{item.text}}
 </li>
 
-<button (click)="openModal()">
-	Show Modal
-</button>
-
 <button (click)="resetData()">
 	Reset Data
 </button>
@@ -28,25 +17,5 @@
 	Fetch Authors
 </button>
 
-<div class="modal" *ngIf="showModal">
-	<div class="modal-content">
-		<span (click)="closeModal()"> × </span>
-		<ul>
-			<li>
-				Create a new Angular project
-			</li>
-			<li>
-				Install Sass
-			</li>
-			<li>
-				Configure Angular to use Sass
-			</li>
-			<li>
-				Import the Sass file in your Angular component
-			</li>
-			<li>
-				Run the Angular application
-			</li>
-		</ul>
-	</div>
-</div>
+<!-- Layer 3 Child Component -->
+<app-details></app-details>
