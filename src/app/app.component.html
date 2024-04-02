@@ -1,7 +1,3 @@
-hello 1
-
-<!-- Default Angular Header -->
-
 <!-- lazy load after 2 seconds -->
 <!-- @defer (on timer(2s)){
 	<app-header></app-header> 
@@ -17,23 +13,6 @@ hello 1
 } @placeholder {
 	<div>Calendar placeholder</div>		
 } -->
-
-<!-- Prefetch -->
-<!-- enables more advanced behaviors, 
-	such as prefetch resources before a user has actually seen or interacted with a defer block
-	but might interact with it soon, making the resources available faster.
-	E.g. the prefetching starts when a browser becomes idle 
-	and the contents of the block is rendered on interaction  
--->
-
-<!-- Render "on" user ineraction...fetch resources (prefetch) when browser becomes idle -->
-@defer (on interaction; prefetch on idle) {
-<app-header></app-header>
-} @placeholder {
-<p> prefetch placeholder </p>
-} @error {
-<p> error placeholder </p>
-}
 
 <!-- Prefetch on Idle
 trigger the deferred loading once the browser has reached an idle state 
@@ -52,59 +31,18 @@ as long as it is a single root element node.
 	<p>loading...</p>
 } -->
 
-<!-- -------------------------------------------------------------------------------  -->
+<!-- Render "on" user ineraction...fetch resources (prefetch) when browser becomes idle -->
+@defer (on interaction; prefetch on idle) {
+<app-header></app-header>
+} @placeholder {
+<p> prefetch placeholder </p>
+} @error {
+<p> error placeholder </p>
+}
 
-<div class="center">
-	<h1 style="color: green;">Modal button with scss</h1>
-	<h3>
-		create an angular application to use scss
-	</h3>
-</div>
+<app-main></app-main>
 
-<div>
-	<button (click)="callApiHandler()">Fetch Repos</button>
-</div>
-<li class="list-item" *ngFor="let item of itemsAll?.slice(0, 4)"><b>{{item.name}}</b> : {{item.description}}
-</li>
 
-<hr> 
 
-<li class="list-item" *ngFor="let item of appData?.slice(0, 4)"><b>{{item.author}}</b> : {{item.text}}
-</li>
-
-<button (click)="openModal()">
-	Show Modal
-</button>
-
-<button (click)="resetData()">
-	Reset Data
-</button>
-
-<button (click)="fetchAuthors()">
-	Fetch Authors
-</button>
-
-<div class="modal" *ngIf="showModal">
-	<div class="modal-content">
-		<span (click)="closeModal()"> × </span>
-		<ul>
-			<li>
-				Create a new Angular project
-			</li>
-			<li>
-				Install Sass
-			</li>
-			<li>
-				Configure Angular to use Sass
-			</li>
-			<li>
-				Import the Sass file in your Angular component
-			</li>
-			<li>
-				Run the Angular application
-			</li>
-		</ul>
-	</div>
-</div>
 
 <router-outlet />
