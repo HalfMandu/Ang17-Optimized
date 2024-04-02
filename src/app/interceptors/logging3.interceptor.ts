@@ -2,11 +2,8 @@ import { finalize, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 // import { HttpInterceptor, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
-  HttpEvent,
-  HttpHeaders,
   HttpInterceptor,
   HttpResponse,
-  HttpErrorResponse,
   HttpHandler,
   HttpRequest,
 } from '@angular/common/http';

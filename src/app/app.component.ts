@@ -23,28 +23,29 @@ export class AppComponent {
   gitHubURL: string = 'https://api.github.com/users/halfmandu/repos'; //array of repo Objects
   itemsAll: any;
 
-  constructor(
-    private httpClient: HttpClient,
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
+
+    localStorage.setItem('access_token', "token");
+
     this.callApiHandler();
     // this.useFetch();
     // this.httpClient1();
   }
-
+  
   //Basic API call with HTTPClient
   callApiHandler() {
     console.log('apiHandler()...');
-    this.httpClient.get(this.gitHubURL).subscribe((res) => {
-      this.itemsAll = Object.values(res);
-    });
+    this.httpClient
+      .get(this.gitHubURL)
+      .subscribe(res => (this.itemsAll = Object.values(res)));
   }
 
   //Reset data to rest cache again
-  resetData(){
-    this.itemsAll = [];  
-    this.appData = [];  
+  resetData() {
+    this.itemsAll = [];
+    this.appData = [];
   }
 
   //fetch basic demo -- doesn't trigger HTTP interceptors...
@@ -53,12 +54,12 @@ export class AppComponent {
     console.log(await response.json());
   }
 
-  //fetch auhor data from http 
-  async fetchAuthors(){
+  //fetch auhor data from http
+  async fetchAuthors() {
     const response = await this.httpClient
       .request('GET', this.authorUrl)
       .pipe(catchError(this.errorHandler));
-    return response.subscribe(data => this.appData = data);
+    return response.subscribe((data) => (this.appData = data));
   }
 
   // HttpClient - http.request

@@ -1,24 +1,23 @@
-import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpResponse,
+} from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
-//Intercept All outgoing HTTP requests and adjust Headers (add Token)
-export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
+//Log the details of HTTP requests and responses...helpful for debugging and monitoring
+@Injectable()
+export class LoggingInterceptor implements HttpInterceptor {
   
-  console.log('Intercepting outgoing request...');
-  console.log(req);
-  // const token = localStorage.getItem('token');
-  const token = 'sometoken';
-  //   const authReq = req.clone({
-  //     headers: req.headers.set(
-  //       'Authorization',
-  //       `Bearer
-  // ${token}`
-  //     ),
-  //   });
-  const authReq = req.clone({
-    headers: req.headers.set(
-      'Authorization', 'Bearer '),
-  });
-  console.log('Adjusted request:');
-  console.log(authReq);
-  return next(authReq);
-};
+  intercept(request: HttpRequest<any>, next: HttpHandler) {
+    return next.handle(request).pipe(
+      tap((event) => {
+        if (event instanceof HttpResponse) {
+          console.log('HTTP Response:', event);
+        }
+      })
+    );
+  }
+}
