@@ -17,7 +17,6 @@ import { RequestTimingInterceptor } from './interceptors/request-timing.intercep
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import { MessageService } from './services/message.service';
 import { RequestCacheService } from './services/requestCache.service';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';

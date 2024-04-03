@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DetailsComponent } from '../details/details.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LoadingService } from '../services/loading.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,7 @@ import { LoadingService } from '../services/loading.service';
   imports: [CommonModule, DetailsComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush, //skip descendant component subtrees with roots, which have not received new inputs
+  // changeDetection: ChangeDetectionStrategy.OnPush, //skip descendant component subtrees with roots, which have not received new inputs
 })
 export class MainComponent {
   @Input() itemsAll: any; //receives inital values from app component oninit()
@@ -21,20 +22,22 @@ export class MainComponent {
   appData: any;
   showModal: boolean = false;
   title = 'scss-app'; //for modal
+  repoSubscription: Subscription = new Subscription;    //used for tracking Repo Observable subscription
 
-  constructor(
-    private httpClient: HttpClient,
-    private loadingService: LoadingService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
+
+  //Making sure to unsubscribe from Subscriptions at end of Component lifecycle
+  ngOnDestroy() {
+    console.log("Unsubscribing from subscriptions in main ngOnDestroy()...")
+    this.repoSubscription.unsubscribe();
+  }
 
   //Basic API call with HTTPClient
   callApiHandler() {
-    // this.loadingService.loadingOn();
     console.log('HttpClient apiHandler()...');
     this.httpClient
       .get(this.gitHubURL)
       .subscribe(res => (this.itemsAll = Object.values(res)));
-    // this.loadingService.loadingOff();
   }
 
   //Reset data to rest cache again
