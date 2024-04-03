@@ -16,30 +16,32 @@ import { CacheInterceptor2 } from './interceptors/cache2.interceptor';
 import { RequestTimingInterceptor } from './interceptors/request-timing.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MessageService } from './services/message.service';
 import { RequestCacheService } from './services/requestCache.service';
 import { routes } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     // provideHttpClient(withInterceptors([LoggingInterceptor2])),    //Angular 17 approach
     provideHttpClient(withInterceptorsFromDi()), //DI being phazed out...but needed for class/Injectable approach
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: LoggingInterceptor3,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptor3,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoggingInterceptor,
       multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CacheInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: CacheInterceptor,
+    //   multi: true,
+    // },
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: CacheInterceptor2,
@@ -55,8 +57,13 @@ export const appConfig: ApplicationConfig = {
       useClass: ErrorInterceptor,
       multi: true,
     },
-    MessageService,
-    RequestCacheService,
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    // RequestCacheService,
     // HttpClientModule, HttpClient, provideHttpClient()
   ],
 };
