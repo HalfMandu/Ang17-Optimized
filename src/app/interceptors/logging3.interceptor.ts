@@ -20,7 +20,7 @@ export class LoggingInterceptor3 implements HttpInterceptor {
     const started = Date.now();
     let ok: string;
 
-    console.log('Intercepting HTTP for logging...');
+    console.log('Intercepting HTTP for logging3...');
 
     // extend server response observable with logging...error is an HttpErrorResponse
     return next.handle(req).pipe(

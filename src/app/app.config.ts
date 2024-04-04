@@ -56,12 +56,12 @@ export const appConfig: ApplicationConfig = {
       useClass: ErrorInterceptor,
       multi: true,
     },
-    provideAnimationsAsync(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
       multi: true,
     },
+    provideAnimationsAsync(),
     // RequestCacheService,
     // HttpClientModule, HttpClient, provideHttpClient()
   ],

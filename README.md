@@ -3,14 +3,15 @@
 This is a Single Page Application built with Angular 17 -- It's purpose is to demonstrate various modern Angular optimization options. 
 
 Application includes: 
-*    defer blocks: lazy-loading, pre-loading, control-flow syntax 
+*    Angular 17+ defer blocks: lazy-loading, pre-loading, control-flow syntax 
 *    Interceptors: logging, caching, loading, token-setting, request-timing, header-changing 
-*    stand-alone components, new Angular 17+ dependency approach
+*    Stand-alone components, new Angular 17+ Component structure
+*    OnPush change detection strategy for a child Component
+*    Caching API calls
+*    RxJs, Observable Pattern
+*    Unsubscribing subscriptions, Tree-Shaking
 *    AOT compilation (default since Angular 9+)
-*    OnPush change detection strategy for one child Component
-*    caching API calls
 *    Global loading indicator (Angular Material spinner)
-*    RxJs, Observable Pattern, unsubscribing
 
 # AngOptimized
 

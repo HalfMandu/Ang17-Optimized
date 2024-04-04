@@ -27,11 +27,13 @@ export class AppComponent {
 
   constructor(private httpClient: HttpClient) {}
 
+  //When page loads, set auth token and use HttpClient to request/set data
   ngOnInit(): void {
     localStorage.setItem('access_token', "token");    //set token after successful authentication
     this.callApiHandler();    //trigger interceptors and retrieve/set data
   }
   
+  //Making sure to unsubscribe() to avoid memory leaks
   ngOnDestroy() {
     console.log("Unsubscribing from subscriptions in app ngOnDestroy()...")
     this.repoSubscription.unsubscribe();
