@@ -32,6 +32,11 @@ export class MainComponent {
     this.repoSubscription.unsubscribe();
   }
 
+  //Enabling trackBy in forloop for performance
+  usingTrackBy(index: any, item: any) {
+    return item.id;     // If each item has an id, return item.id
+  }  
+
   //Basic API call with HTTPClient
   callApiHandler() {
     console.log('HttpClient apiHandler()...');

@@ -1,12 +1,12 @@
 <div>
 	<button (click)="callApiHandler()">Fetch Repos</button>
 </div>
-<li class="list-item" *ngFor="let item of itemsAll?.slice(0, 4)"><b>{{item.name}}</b> : {{item.description}}
+<li class="list-item" *ngFor="let item of itemsAll?.slice(0, 4) trackBy: usingTrackBy"><b>{{item.name}}</b> : {{item.description}}
 </li>
 
 <hr> 
 
-<li class="list-item" *ngFor="let item of appData?.slice(0, 4)"><b>{{item.author}}</b> : {{item.text}}
+<li class="list-item" *ngFor="let item of appData?.slice(0, 4) trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}}
 </li>
 
 <button (click)="resetData()">
