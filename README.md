@@ -10,6 +10,8 @@ Application includes:
 *    Caching API calls
 *    RxJs, Observable Pattern
 *    Unsubscribing subscriptions, Tree-Shaking
+*    TrackBy in *ngFor loops
+*    Async Pipe to display Subscription
 *    AOT compilation (default since Angular 9+)
 *    Global loading indicator (Angular Material spinner)
 

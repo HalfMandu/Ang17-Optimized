@@ -22,7 +22,7 @@ export class AppComponent {
   appData: any;
   authorUrl: string = 'https://type.fit/api/quotes'; //array of 2-field objects: author, text
   gitHubURL: string = 'https://api.github.com/users/halfmandu/repos'; //array of repo Objects
-  itemsAll: any;
+  repos: any;
   repoSubscription: Subscription = new Subscription;    //used for tracking Repo Observable subscription
 
   constructor(private httpClient: HttpClient) {}
@@ -45,7 +45,7 @@ export class AppComponent {
     console.log('Repo apiHandler()...');
     this.repoSubscription = this.httpClient
       .get(this.gitHubURL)
-      .subscribe(res => (this.itemsAll = Object.values(res)));
+      .subscribe(res => (this.repos = Object.values(res)));
   }
   
 }
