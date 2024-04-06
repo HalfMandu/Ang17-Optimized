@@ -12,6 +12,7 @@ Application includes:
 *    Unsubscribing subscriptions, Tree-Shaking
 *    TrackBy in *ngFor loops
 *    Async Pipe to display Subscription
+*    Web Workers basic setup
 *    AOT compilation (default since Angular 9+)
 *    Global loading indicator (Angular Material spinner)
 

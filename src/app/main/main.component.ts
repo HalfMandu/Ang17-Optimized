@@ -71,6 +71,22 @@ export class MainComponent {
     // return response.subscribe((data) => (this.quotes = data));
   }
 
+  //button inititated -- activate web workers
+  useWebWorker() {
+    if (typeof Worker !== 'undefined') {
+      // Create a new one
+      const worker = new Worker(new URL('../app.worker', import.meta.url));
+      worker.onmessage = ({ data }) => {
+        console.log(`webworker received message: ${data}`);
+      };
+      worker.postMessage('webworker says hello');
+    } else {
+      console.log(`Web workers are not supported in this environment`);
+      // Web workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    }
+  }
+
   //Making sure to unsubscribe from Subscriptions at end of Component lifecycle
   ngOnDestroy() {
     console.log('Unsubscribing from subscriptions in main ngOnDestroy()...');

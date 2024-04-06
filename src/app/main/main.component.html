@@ -1,18 +1,13 @@
 <div>
 	<button (click)="getRepos()">Get Repos</button>
 </div>
-<li class="list-item" *ngFor="let repo of repos?.slice(0, 4) trackBy: usingTrackBy"><b>{{repo.name}}</b> : {{repo.description}}
+<li class="list-item" *ngFor="let repo of repos?.slice(0, 4) trackBy: usingTrackBy"><b>{{repo.name}}</b> :
+	{{repo.description}}
 </li>
 
-<hr> 
+<hr>
 
-<li class="list-item" *ngFor="let item of (quotes | async)"><b>{{item.author}}</b> : {{item.text}}
-<!-- <li class="list-item" *ngFor="let item of quotes?.slice(0, 4) trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}} -->
-<!-- <li class="list-item" *ngFor="let item of (quotes | async) | keyvalue"><b>{{item.value}}</b> : -->
-<!-- <li class="list-item" *ngFor="let item of quotes2 trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}} -->
-<!-- <li class="list-item" *ngFor="let quote of appDataSub"><b>{{quote.author}}</b> : {{quote.text}} -->
-<!-- <li class="list-item" *ngFor="let item of quotes | slice:0:5"><b>{{item.author}}</b> : {{item.text}} -->
-<!-- <li class="list-item" *ngFor="let item of appData | async trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}} -->
+<li class="list-item" *ngFor="let item of (quotes | async) trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}}
 </li>
 
 <!--  -->
@@ -23,6 +18,11 @@
 <!-- re-populate quotes list -->
 <button (click)="getQuotes()">
 	Get Quotes
+</button>
+
+<!-- re-populate quotes list -->
+<button (click)="useWebWorker()">
+	Use Web Workers
 </button>
 
 <!-- Layer 3 Child Component -->
