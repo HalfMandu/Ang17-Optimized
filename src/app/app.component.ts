@@ -18,11 +18,10 @@ import {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title1 = 'ang-optimized';
-  appData: any;
+  
   authorUrl: string = 'https://type.fit/api/quotes'; //array of 2-field objects: author, text
   gitHubURL: string = 'https://api.github.com/users/halfmandu/repos'; //array of repo Objects
-  repos: any;
+  repos: any;         //array of Repo objects
   repoSubscription: Subscription = new Subscription;    //used for tracking Repo Observable subscription
 
   constructor(private httpClient: HttpClient) {}

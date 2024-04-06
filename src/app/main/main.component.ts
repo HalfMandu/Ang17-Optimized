@@ -14,24 +14,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   // changeDetection: ChangeDetectionStrategy.OnPush, //skip descendant component subtrees with roots, which have not received new inputs
 })
 export class MainComponent {
-  @Input() repos: any; //receives inital values from app component oninit()
+
+  @Input() repos: any;  //receives inital values from app component oninit()
   gitHubURL: string = 'https://api.github.com/users/halfmandu/repos'; //array of repo Objects
   quoteUrl: string = 'https://type.fit/api/quotes'; //array of 2-field objects: author, text
   quotes: Observable<Quote[]> = new Observable();
   quotes2: any;
-  // appDataSub: Observable<any> = new Observable;
-  // quotes3: Observable<Quote[]> = [];
-  // quotes: Quote[] = [];
   showModal: boolean = false;
-  title = 'scss-app'; //for modal
   repoSubscription: Subscription = new Subscription(); //used for tracking Repo Observable subscription
 
   constructor(private httpClient: HttpClient) {}
 
   async ngOnInit() {
-    //this.appData = this.dataService.getData();
+    //this.quotesa = this.quotesService.getQuotes();    //service version
     //this.quotes2 = await this.getAuthors();    //working with async pipe
-    //this.quotes2 = await this.getAuthors2();    
   }
 
   //Basic API call with HTTPClient
@@ -42,7 +38,7 @@ export class MainComponent {
       .subscribe((res) => (this.repos = Object.values(res)));
   }
 
-  //button triggered -- this version uses Async pipe in the view...automatically subscribes/unsubscribes
+  //Button triggered -- this version uses Async pipe in the view...automatically subscribes/unsubscribes
   async getQuotes() {
     this.quotes = this.httpClient
       .request<Quote[]>('GET', this.quoteUrl)
@@ -50,15 +46,14 @@ export class MainComponent {
       .pipe(catchError(this.errorHandler));
   }
 
-  //Re-populate the Quotes list with async pipe
+  //Alternative way using Object.values()
   async getQuotes2() {
-    // console.log('get Quotes2...');
-    // this.quotes = Object.values(
-    //   await this.httpClient
-    //     .request<Quote>('GET', this.quoteUrl)
-    //     .pipe(take(4))
-    //     .pipe(catchError(this.errorHandler))
-    // );
+    console.log('get Quotes2()...');
+    this.quotes2 = Object.values(
+      await this.httpClient
+        .request<Quote>('GET', this.quoteUrl)
+        .pipe(catchError(this.errorHandler))
+    );
   }
 
   //Fetch auhor data from http without async pipe -- old/traditional way

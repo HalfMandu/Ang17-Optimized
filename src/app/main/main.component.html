@@ -10,7 +10,7 @@
 <li class="list-item" *ngFor="let item of (quotes | async) trackBy: usingTrackBy"><b>{{item.author}}</b> : {{item.text}}
 </li>
 
-<!--  -->
+<!-- clear out local scop -->
 <button (click)="resetData()">
 	Reset Data
 </button>
